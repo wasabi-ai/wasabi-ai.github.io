@@ -1,0 +1,62 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Bio from "../../components/Bio.astro";
+import { type Post, getPostData } from "../../utils/getPostData";
+
+export async function getStaticPaths() {
+  const posts: Record<string, any>[] = await Astro.glob(
+    "../../data/blog-posts/*.md"
+  );
+  return posts.map((p) => ({
+    params: { slug: p.file.split("/").pop().split(".").shift() },
+    props: { post: p },
+  }));
+}
+
+const { Content, frontmatter } = Astro.props.post;
+const { title, description, publishDate } = frontmatter;
+const { slug } = getPostData(Astro.props.post as Post);
+const permalink = `${Astro.site!.href}blog/${slug}`;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  permalink={permalink}
+  current="blog"
+>
+  <header>
+    <p>{publishDate}</p>
+    <h2>{title}</h2>
+  </header>
+  <div class="container">
+    <hr />
+    <article class="content">
+      <Content />
+    </article>
+    <hr />
+    <Bio />
+  </div>
+</BaseLayout>
+
+<style>
+  header {
+    text-align: center;
+  }
+
+  header h1 {
+    margin-bottom: 0.7em;
+  }
+
+  header p {
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    font-family: var(--font-family-sans);
+    font-weight: 600;
+  }
+
+  header hr {
+    min-width: 100px;
+    width: 30%;
+  }
+</style>

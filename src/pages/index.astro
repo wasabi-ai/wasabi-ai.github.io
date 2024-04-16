@@ -1,0 +1,52 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "Wasabi Labs";
+const description = "";
+const permalink = Astro.site!.href;
+---
+
+<BaseLayout title={title} description={description} permalink={permalink}>
+  <div class="hero-image">
+    <div class="hero-copy">
+      <h1>Wasabi Labs</h1>
+      <p>
+        Wasabi Labs is a ML research team and consultancy specializing in
+        startup advising. We help early-stage companies implement effective
+        machine learning strategies, from data analysis to product development.
+
+        <a href="mailto:contact@wasabilabs.ai">Contact us</a> to learn more.
+      </p>
+      <!-- <p>
+      Learn <a href="/about">more about us</a> or check out our
+      <a href="/blog">blog</a> for our latest research projects.
+    </p> -->
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .hero-image {
+    background-image: url("/assets/hero.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+  }
+  .hero-copy {
+    font-family: var(--font-family-sans);
+    flex: 1;
+    padding: 0 1em;
+    text-align: center;
+    position: absolute;
+    color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .caption {
+    font-size: 0.8em;
+    font-style: italic;
+    text-align: left;
+  }
+</style>
